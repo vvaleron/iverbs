@@ -1,7 +1,7 @@
 # iverbs
 irregular verbs game
-
-
-to run this app you should use two commands:
-    npm install
+</br>
+</br>
+to run this app you should use two commands:</br>
+    npm install </br>
     npm run server

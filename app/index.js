@@ -1,7 +1,9 @@
 'use strict';
-
 import './styles';
-import config from './configs/app.config';
+import common from './common';
+import configs from './configs';
 
 var body = document.querySelector('body');
-body.textContent = 'Config text: ' + config.text;
+body.textContent = 'app.config text: ' + configs.app.text;
+
+console.log('common.utils', common.utils);

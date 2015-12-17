@@ -5,7 +5,7 @@ var compiler = webpack(webpackConfig);
 var server = new WebpackDevServer(compiler, {
     // webpack-dev-server options
 
-    contentBase: "./",
+    contentBase: "./build",
     // or: contentBase: "http://localhost/",
 
     hot: true,

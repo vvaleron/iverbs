@@ -1,0 +1,12 @@
+div.card {
+  width: 32%;
+  height: 25%;
+  display: inline-table;
+  border: blue solid 1px;
+  text-align: center;
+
+  > div {
+    margin: 2px;
+    height: 100%;
+  }
+}

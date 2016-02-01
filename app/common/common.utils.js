@@ -1,6 +1,14 @@
+import gameAria from './../components/area/game.area';
+import $ from 'jquery';
+
 class CommonUtils {
     constructor () {
+        this.gameAria = new gameAria();
+    }
 
+    initGame () {
+        const el = document.body;
+        this.gameAria.renderTo(el);
     }
 
     getClass (el) {

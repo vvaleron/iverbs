@@ -26,6 +26,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'iVerbs',
             filename: 'index.html'
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jquery: "jQuery",
+            "windows.jQuery": "jquery"
         })
     ],
     module : {

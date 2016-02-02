@@ -1,4 +1,20 @@
+div.card {
+  width: 32%;
+  height: 25%;
+  display: inline-table;
+  border: blue solid 1px;
+  text-align: center; }
+  div.card > div {
+    margin: 2px;
+    height: 100%; }
 body {
   background-color: #f1f2f3; }
+div.game-aria {
+  top: 0;
+  left: 0;
+  width: 80%;
+  max-width: 400px;
+  height: 80%;
+  position: absolute; }
 
 /*# sourceMappingURL=style.css.map*/

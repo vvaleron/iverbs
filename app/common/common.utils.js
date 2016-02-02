@@ -2,21 +2,13 @@ import gameAria from './../components/area/game.area';
 import $ from 'jquery';
 
 class CommonUtils {
-    constructor () {
-        this.gameAria = new gameAria();
+    constructor (irregularVerbs) {
+        this.gameAria = new gameAria(irregularVerbs);
     }
 
     initGame () {
         const el = document.body;
         this.gameAria.renderTo(el);
-    }
-
-    getClass (el) {
-        console.log('CommonUtils.getClass(el) el = ', el);
-    }
-
-    toogleClass (el, cls) {
-        console.log('CommonUtils.toogleClass(el, cls) el, cls = ', el, cls);
     }
 }
 

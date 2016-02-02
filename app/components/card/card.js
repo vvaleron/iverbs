@@ -1,17 +1,19 @@
 import template from './card.html';
 
-let index = 0;
-
 export default class Card {
-    constructor () {
-        this.id = `card-id-${index}`;
+    constructor (config) {
+        this.time = config.time;
+        this.word = config.word;
+        this.groupId = config.groupId;
+        this.isShown = false;
+        this.completed = false;
+
         this.el = $.parseHTML(template)[0];
         this.children = $(this.el).children();
         this.template = template;
-        this.isShown = false;
 
+        this.setWord(this.word);
         this.attachEvents();
-        index += 1;
     }
 
     get activeEl () {
@@ -29,8 +31,11 @@ export default class Card {
     }
 
     onClick (event) {
-        console.log('card =>', this);
         this.open();
+        event.stopPropagation();
+        if (!this.completed) {
+            $(this.el.parentElement).triggerHandler('click', this);
+        }
     }
 
     open () {
@@ -41,5 +46,9 @@ export default class Card {
         $(this.activeEl).hide();
         $(this.inactiveEl).show();
         this.isShown = !this.isShown;
+    }
+
+    setWord (word) {
+        $(this.children[0]).find('.body').text(word);
     }
 };

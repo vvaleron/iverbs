@@ -1,6 +1,7 @@
 .idea
 node_modules
 npm-debug.log
+build
 /build/**/*hot-update.js
 /build/**/*hot-update.js.map
 /build/**/*hot-update.json

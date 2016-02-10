@@ -9,10 +9,16 @@ export default class GameAria {
         this.times = this.verbsList[0];
         this.cards = [];
         this.activeCards = [];
+        this.completedCards = [];
+        this.completedGroups = [];
     }
 
-    get isCompleted () {
-        return !this.cards.filter((item) => item.completed !== true).length;
+    get isLevelCompleted () {
+        return !this.cards.filter((item) => item.isCompleted !== true).length;
+    }
+
+    get isSuccess () {
+        return this.activeCards.filter((item) => item.isCompleted !== true).length === 3
     }
 
     renderTo (el) {
@@ -20,9 +26,9 @@ export default class GameAria {
 
         if (this.el === null) {
             this.el = $(el).children()[0];
+            this.rows = $(this.el).children('.section');
         }
         this.attachEvents();
-        this.calculateSize(el);
         this.generateCards();
     }
 
@@ -33,46 +39,59 @@ export default class GameAria {
     }
 
     onClick (event, card) {
-        const activeCard = this.activeCards[0];
+        const activeCard = this.activeCards.filter((item) => item.isCompleted !== true)[0];
         const isEmpty = !this.activeCards.length;
-        const isEquals = activeCard ? activeCard.groupId === card.groupId : false;
+        const isEquals = activeCard && card
+            ? activeCard.groupId === card.groupId
+            : false;
+
+        if (!card || card && card.isCompleted) {
+            return;
+        }
 
         if (isEmpty || isEquals) {
             this.addToActive(card);
         }
 
-        if (!isEmpty && !isEquals) {
-            this.clearActive();
+        if (!isEmpty && !isEquals && !this.isSuccess) {
+            this.resetActive();
             this.addToActive(card);
         }
 
-        if (this.activeCards.length === 3) {
-            this.successGroup();
+        if (this.isSuccess) {
+            this.successWord(card.groupId);
         }
     }
 
     generateCards (groupsCount = 4) {
-        while (groupsCount--) {
+        let rowIndex = 0;
+        this.rows.children().remove('*');
+
+        while (--groupsCount) {
             const group = this.verbsList[this.groupIterration];
 
-            if (group.completed) {
-                groupsCount +=1;
-            } else {
-                this.parseGroup(group);
+            if (group.isCompleted) {
+                groupsCount += 1;
                 this.groupIterration += 1;
+                break;
             }
+
+            this.createGroup(group);
+            this.groupIterration += 1;
         }
 
         this.cards = this.shuffle(this.cards);
+        this.cards.forEach((item, index) => {
 
-        this.cards.forEach((item) => $(this.el).append(item.el));
+            if (index % 3 === 0) {
+                rowIndex = index / 3;
+            }
+
+            $(this.rows[rowIndex]).append(item.el);
+        });
     }
 
-    calculateSize (parentEl) {
-        console.log('calculateSize() parentEl =>', parentEl);
-    };
-
-    parseGroup (group) {
+    createGroup (group) {
         this.createCard({time: this.times.pf, word: group.pf, groupId: group.id});
         this.createCard({time: this.times.word, word: group.word, groupId: group.id});
         this.createCard({time: this.times.ppf, word: group.ppf, groupId: group.id});
@@ -81,44 +100,47 @@ export default class GameAria {
     createCard (cardConfig) {
         const card = new Card(cardConfig);
         this.cards.push(card);
+        return card;
     }
 
     addToActive (card) {
         this.activeCards.push(card);
     }
 
-    clearActive () {
+    resetActive () {
         this.hideAllCards();
-        this.activeCards = [];
+        this.activeCards = this.activeCards.filter((item) => item.isCompleted === true);
     }
 
     hideAllCards () {
         this.activeCards.forEach((card) => {
-            card.change();
-        })
+            if (!card.isCompleted) {
+                card.toggle();
+            }
+        });
     }
 
-    successGroup (groupId) {
-
+    successWord (groupId) {
         this.verbsList.forEach((item) => {
             if (item.id === this) {
-                item.completed = true;
+                item.isCompleted = true;
             }
         }, groupId);
 
         this.activeCards.forEach((item) => {
-            item.completed = true;
-            $(item.el).hide();
+            item.isCompleted = true;
+            this.completedCards.push(item);
         });
 
-        if (this.isCompleted) {
-            alert('Congrats!');
+        if (this.isLevelCompleted) {
+            alert(`You finished ${this.groupIterration} irregular verbs`);
             this.refreshCards();
         }
     }
 
     refreshCards () {
         this.cards = [];
+        this.activeCards = [];
         this.generateCards();
     };
 

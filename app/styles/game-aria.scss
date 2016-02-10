@@ -1,8 +1,44 @@
-div.game-aria {
+.game-aria {
   top: 0;
   left: 0;
-  width: 80%;
-  max-width: 400px;
+  width: 100%;
   height: 80%;
-  position: absolute;
+  margin: 2px;
+  position: relative;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  -o-perspective: 800px;
+  perspective: 800px;
+}
+/*  SECTIONS  */
+.section {
+  clear: both;
+  padding: 0px;
+  margin: 0px;
+  height: 32%
+}
+
+/*  COLUMN SETUP  */
+.col {
+  display: block;
+  float:left;
+  margin: 1% 0 1% 1%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+
+/*  GRID OF THREE  */
+.span-3-of-3 { width: 100%; }
+.span-2-of-3 { width: 66.33%; }
+.span-1-of-3 { width: 32.66%; height: 25%;}
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+  .col {  margin: 1% 0 1% 0%; }
+  .span-3-of-3, .span-2-of-3, .span-1-of-3 { width: 100%; }
 }

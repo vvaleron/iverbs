@@ -6,7 +6,7 @@ export default class Card {
         this.word = config.word;
         this.groupId = config.groupId;
         this.isShown = false;
-        this.completed = false;
+        this.isCompleted = false;
 
         this.el = $.parseHTML(template)[0];
         this.children = $(this.el).children();
@@ -14,6 +14,10 @@ export default class Card {
 
         this.setWord(this.word);
         this.attachEvents();
+    }
+
+    get isActive () {
+        return this.isCompleted ? false : !this.isShown;
     }
 
     get activeEl () {
@@ -31,24 +35,19 @@ export default class Card {
     }
 
     onClick (event) {
-        this.open();
-        event.stopPropagation();
-        if (!this.completed) {
-            $(this.el.parentElement).triggerHandler('click', this);
+        if (this.isActive) {
+            this.toggle();
+            $(this.el.parentElement).trigger('click', this);
         }
     }
 
-    open () {
-        this.change();
-    }
-
-    change () {
-        $(this.activeEl).hide();
-        $(this.inactiveEl).show();
+    toggle () {
+        $(this.el).toggleClass('flipped');
         this.isShown = !this.isShown;
     }
 
     setWord (word) {
-        $(this.children[0]).find('.body').text(word);
+        $(this.el).find('.front').children('.text').text(word);
+        $(this.el).find('.back').children('.text').text(word);
     }
 };

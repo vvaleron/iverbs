@@ -1,12 +1,62 @@
 div.card {
-  width: 32%;
-  height: 25%;
-  display: inline-table;
-  border: blue solid 1px;
   text-align: center;
+  margin: 2px;
+  height: 100%;
+
+  background: #40a070;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+
+  -webkit-transition: -webkit-transform 1s;
+  -moz-transition: -moz-transform 1s;
+  -o-transition: -o-transform 1s;
+  transition: transform 1s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 50%;
 
   > div {
-    margin: 2px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+  }
+
+  div.front {
+    .text {
+      color: #458645;
+      font-weight: bold;
+    }
+  }
+
+  div.back {
     height: 100%;
+    background: #cacaca;
+
+    -webkit-transform: rotateY( -180deg );
+    -moz-transform: rotateY( -180deg );
+    -o-transform: rotateY( -180deg );
+    transform: rotateY( -180deg );
+  }
+
+}
+
+div.text {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.card.flipped {
+  -webkit-transform: rotateY( 180deg );
+  -moz-transform: rotateY( 180deg );
+  -o-transform: rotateY( 180deg );
+  transform: rotateY( 180deg );
+
+  div.front {
+    display: none;
   }
 }

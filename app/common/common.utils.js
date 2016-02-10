@@ -7,8 +7,7 @@ class CommonUtils {
     }
 
     initGame () {
-        const el = document.body;
-        this.gameAria.renderTo(el);
+        this.gameAria.renderTo(document.body);
     }
 }
 

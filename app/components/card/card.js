@@ -47,7 +47,9 @@ export default class Card {
     }
 
     setWord (word) {
-        $(this.el).find('.front').children('.text').text(word);
+        if (document.location.search.indexOf('debug') !== -1) {
+            $(this.el).find('.front').children('.text').text(word);
+        }
         $(this.el).find('.back').children('.text').text(word);
     }
 };

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "544f44bcac3f13b55c39"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3884154d24ee1195b730"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -77,33 +77,47 @@
 /******/ 		};
 /******/ 		for(var name in __webpack_require__) {
 /******/ 			if(Object.prototype.hasOwnProperty.call(__webpack_require__, name)) {
-/******/ 				fn[name] = __webpack_require__[name];
+/******/ 				Object.defineProperty(fn, name, (function(name) {
+/******/ 					return {
+/******/ 						configurable: true,
+/******/ 						enumerable: true,
+/******/ 						get: function() {
+/******/ 							return __webpack_require__[name];
+/******/ 						},
+/******/ 						set: function(value) {
+/******/ 							__webpack_require__[name] = value;
+/******/ 						}
+/******/ 					};
+/******/ 				}(name)));
 /******/ 			}
 /******/ 		}
-/******/ 		fn.e = function(chunkId, callback) {
-/******/ 			if(hotStatus === "ready")
-/******/ 				hotSetStatus("prepare");
-/******/ 			hotChunksLoading++;
-/******/ 			__webpack_require__.e(chunkId, function() {
-/******/ 				try {
-/******/ 					callback.call(null, fn);
-/******/ 				} finally {
-/******/ 					finishChunkLoading();
-/******/ 				}
+/******/ 		Object.defineProperty(fn, "e", {
+/******/ 			enumerable: true,
+/******/ 			value: function(chunkId, callback) {
+/******/ 				if(hotStatus === "ready")
+/******/ 					hotSetStatus("prepare");
+/******/ 				hotChunksLoading++;
+/******/ 				__webpack_require__.e(chunkId, function() {
+/******/ 					try {
+/******/ 						callback.call(null, fn);
+/******/ 					} finally {
+/******/ 						finishChunkLoading();
+/******/ 					}
 /******/ 	
-/******/ 				function finishChunkLoading() {
-/******/ 					hotChunksLoading--;
-/******/ 					if(hotStatus === "prepare") {
-/******/ 						if(!hotWaitingFilesMap[chunkId]) {
-/******/ 							hotEnsureUpdateChunk(chunkId);
-/******/ 						}
-/******/ 						if(hotChunksLoading === 0 && hotWaitingFiles === 0) {
-/******/ 							hotUpdateDownloaded();
+/******/ 					function finishChunkLoading() {
+/******/ 						hotChunksLoading--;
+/******/ 						if(hotStatus === "prepare") {
+/******/ 							if(!hotWaitingFilesMap[chunkId]) {
+/******/ 								hotEnsureUpdateChunk(chunkId);
+/******/ 							}
+/******/ 							if(hotChunksLoading === 0 && hotWaitingFiles === 0) {
+/******/ 								hotUpdateDownloaded();
+/******/ 							}
 /******/ 						}
 /******/ 					}
-/******/ 				}
-/******/ 			});
-/******/ 		};
+/******/ 				});
+/******/ 			}
+/******/ 		});
 /******/ 		return fn;
 /******/ 	}
 /******/ 	
@@ -2017,7 +2031,7 @@
 	'use strict';
 	
 	/* global crypto:true */
-	var crypto = __webpack_require__(84);
+	var crypto = __webpack_require__(85);
 	
 	// This string has length 32, a power of 2, so the modulus doesn't introduce a
 	// bias.
@@ -12231,19 +12245,21 @@
 
 	"use strict";
 	
+	exports.__esModule = true;
+	
 	exports.default = function (instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError("Cannot call a class as a function");
 	  }
 	};
-	
-	exports.__esModule = true;
 
 /***/ },
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
+	
+	exports.__esModule = true;
 	
 	var _defineProperty = __webpack_require__(47);
 	
@@ -12268,8 +12284,6 @@
 	    return Constructor;
 	  };
 	})();
-	
-	exports.__esModule = true;
 
 /***/ },
 /* 18 */
@@ -12483,8 +12497,8 @@
 
 	'use strict';
 	
-	var required = __webpack_require__(90)
-	  , lolcation = __webpack_require__(89)
+	var required = __webpack_require__(62)
+	  , lolcation = __webpack_require__(90)
 	  , qs = __webpack_require__(61)
 	  , relativere = /^\/(?!\/)/;
 	
@@ -13097,7 +13111,7 @@
 	
 	var inherits = __webpack_require__(1)
 	  , AjaxBasedTransport = __webpack_require__(8)
-	  , EventSourceReceiver = __webpack_require__(76)
+	  , EventSourceReceiver = __webpack_require__(77)
 	  , XHRCorsObject = __webpack_require__(15)
 	  , EventSourceDriver = __webpack_require__(28)
 	  ;
@@ -13129,7 +13143,7 @@
 	'use strict';
 	
 	var inherits = __webpack_require__(1)
-	  , HtmlfileReceiver = __webpack_require__(77)
+	  , HtmlfileReceiver = __webpack_require__(78)
 	  , XHRLocalObject = __webpack_require__(10)
 	  , AjaxBasedTransport = __webpack_require__(8)
 	  ;
@@ -13307,8 +13321,8 @@
 	
 	var inherits = __webpack_require__(1)
 	  , urlUtils = __webpack_require__(5)
-	  , BufferedSender = __webpack_require__(74)
-	  , Polling = __webpack_require__(75)
+	  , BufferedSender = __webpack_require__(75)
+	  , Polling = __webpack_require__(76)
 	  ;
 	
 	var debug = function() {};
@@ -13488,7 +13502,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var CommonUtils = (function () {
+	var CommonUtils = function () {
 	    function CommonUtils(irregularVerbs) {
 	        (0, _classCallCheck3.default)(this, CommonUtils);
 	
@@ -13502,7 +13516,7 @@
 	        }
 	    }]);
 	    return CommonUtils;
-	})();
+	}();
 	
 	exports.default = CommonUtils;
 
@@ -14137,7 +14151,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var GameAria = (function () {
+	var GameAria = function () {
 	    function GameAria(verbsList) {
 	        (0, _classCallCheck3.default)(this, GameAria);
 	
@@ -14287,8 +14301,6 @@
 	
 	            if (this.isLevelCompleted) {
 	                alert('You finished ' + this.groupIterration + ' irregular verbs');
-	                alert('You finished ' + this.groupIterration + ' irregular verbs');
-	                alert('You finished ' + this.groupIterration + ' irregular verbs');
 	                this.refreshCards();
 	            }
 	        }
@@ -14332,7 +14344,7 @@
 	        }
 	    }]);
 	    return GameAria;
-	})();
+	}();
 	
 	exports.default = GameAria;
 	;
@@ -14362,7 +14374,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Card = (function () {
+	var Card = function () {
 	    function Card(config) {
 	        (0, _classCallCheck3.default)(this, Card);
 	
@@ -14408,7 +14420,9 @@
 	    }, {
 	        key: 'setWord',
 	        value: function setWord(word) {
-	            $(this.el).find('.front').children('.text').text(word);
+	            if (document.location.search.indexOf('debug') !== -1) {
+	                $(this.el).find('.front').children('.text').text(word);
+	            }
 	            $(this.el).find('.back').children('.text').text(word);
 	        }
 	    }, {
@@ -14428,7 +14442,7 @@
 	        }
 	    }]);
 	    return Card;
-	})();
+	}();
 	
 	exports.default = Card;
 	;
@@ -15147,13 +15161,57 @@
 
 /***/ },
 /* 62 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	/**
+	 * Check if we're required to add a port number.
+	 *
+	 * @see https://url.spec.whatwg.org/#default-port
+	 * @param {Number|String} port Port number we need to check
+	 * @param {String} protocol Protocol we need to check against.
+	 * @returns {Boolean} Is it a default port for the given protocol
+	 * @api private
+	 */
+	module.exports = function required(port, protocol) {
+	  protocol = protocol.split(':')[0];
+	  port = +port;
+	
+	  if (!port) return false;
+	
+	  switch (protocol) {
+	    case 'http':
+	    case 'ws':
+	    return port !== 80;
+	
+	    case 'https':
+	    case 'wss':
+	    return port !== 443;
+	
+	    case 'ftp':
+	    return port !== 21;
+	
+	    case 'gopher':
+	    return port !== 70;
+	
+	    case 'file':
+	    return false;
+	  }
+	
+	  return port !== 0;
+	};
+
+
+/***/ },
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 	
-	var transportList = __webpack_require__(71);
+	var transportList = __webpack_require__(72);
 	
-	module.exports = __webpack_require__(69)(transportList);
+	module.exports = __webpack_require__(70)(transportList);
 	
 	// TODO can't get rid of this until all servers do
 	if ('_sockjs_onload' in global) {
@@ -15163,7 +15221,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 63 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15186,7 +15244,7 @@
 
 
 /***/ },
-/* 64 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15207,7 +15265,7 @@
 
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15240,7 +15298,7 @@
 
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -15248,7 +15306,7 @@
 	var urlUtils = __webpack_require__(5)
 	  , eventUtils = __webpack_require__(7)
 	  , JSON3 = __webpack_require__(6)
-	  , FacadeJS = __webpack_require__(65)
+	  , FacadeJS = __webpack_require__(66)
 	  , InfoIframeReceiver = __webpack_require__(25)
 	  , iframeUtils = __webpack_require__(12)
 	  , loc = __webpack_require__(26)
@@ -15349,7 +15407,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -15425,7 +15483,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), (function() { return this; }())))
 
 /***/ },
-/* 68 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -15436,8 +15494,8 @@
 	  , XDR = __webpack_require__(20)
 	  , XHRCors = __webpack_require__(15)
 	  , XHRLocal = __webpack_require__(10)
-	  , XHRFake = __webpack_require__(80)
-	  , InfoIframe = __webpack_require__(67)
+	  , XHRFake = __webpack_require__(81)
+	  , InfoIframe = __webpack_require__(68)
 	  , InfoAjax = __webpack_require__(24)
 	  ;
 	
@@ -15521,30 +15579,30 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
 	
-	__webpack_require__(70);
+	__webpack_require__(71);
 	
 	var URL = __webpack_require__(22)
 	  , inherits = __webpack_require__(1)
 	  , JSON3 = __webpack_require__(6)
 	  , random = __webpack_require__(9)
-	  , escape = __webpack_require__(85)
+	  , escape = __webpack_require__(86)
 	  , urlUtils = __webpack_require__(5)
 	  , eventUtils = __webpack_require__(7)
-	  , transport = __webpack_require__(87)
+	  , transport = __webpack_require__(88)
 	  , objectUtils = __webpack_require__(21)
 	  , browser = __webpack_require__(11)
-	  , log = __webpack_require__(86)
+	  , log = __webpack_require__(87)
 	  , Event = __webpack_require__(18)
 	  , EventTarget = __webpack_require__(23)
 	  , loc = __webpack_require__(26)
-	  , CloseEvent = __webpack_require__(63)
-	  , TransportMessageEvent = __webpack_require__(64)
-	  , InfoReceiver = __webpack_require__(68)
+	  , CloseEvent = __webpack_require__(64)
+	  , TransportMessageEvent = __webpack_require__(65)
+	  , InfoReceiver = __webpack_require__(69)
 	  ;
 	
 	var debug = function() {};
@@ -15902,14 +15960,14 @@
 	
 	module.exports = function(availableTransports) {
 	  transports = transport(availableTransports);
-	  __webpack_require__(66)(SockJS, availableTransports);
+	  __webpack_require__(67)(SockJS, availableTransports);
 	  return SockJS;
 	};
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), (function() { return this; }())))
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports) {
 
 	/* eslint-disable */
@@ -16388,15 +16446,15 @@
 
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	module.exports = [
 	  // streaming transports
-	  __webpack_require__(81)
-	, __webpack_require__(83)
+	  __webpack_require__(82)
+	, __webpack_require__(84)
 	, __webpack_require__(33)
 	, __webpack_require__(29)
 	, __webpack_require__(19)(__webpack_require__(29))
@@ -16405,14 +16463,14 @@
 	, __webpack_require__(30)
 	, __webpack_require__(19)(__webpack_require__(30))
 	, __webpack_require__(34)
-	, __webpack_require__(82)
+	, __webpack_require__(83)
 	, __webpack_require__(19)(__webpack_require__(34))
-	, __webpack_require__(73)
+	, __webpack_require__(74)
 	];
 
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global.WebSocket || global.MozWebSocket;
@@ -16420,7 +16478,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -16435,8 +16493,8 @@
 	
 	var inherits = __webpack_require__(1)
 	  , SenderReceiver = __webpack_require__(32)
-	  , JsonpReceiver = __webpack_require__(78)
-	  , jsonpSender = __webpack_require__(79)
+	  , JsonpReceiver = __webpack_require__(79)
+	  , jsonpSender = __webpack_require__(80)
 	  ;
 	
 	function JsonPTransport(transUrl) {
@@ -16461,7 +16519,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -16555,7 +16613,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -16619,7 +16677,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -16689,7 +16747,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -16781,7 +16839,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), (function() { return this; }())))
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -16967,7 +17025,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), (function() { return this; }())))
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -17073,7 +17131,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), (function() { return this; }())))
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17103,7 +17161,7 @@
 
 
 /***/ },
-/* 81 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -17112,7 +17170,7 @@
 	  , urlUtils = __webpack_require__(5)
 	  , inherits = __webpack_require__(1)
 	  , EventEmitter = __webpack_require__(4).EventEmitter
-	  , WebsocketDriver = __webpack_require__(72)
+	  , WebsocketDriver = __webpack_require__(73)
 	  ;
 	
 	var debug = function() {};
@@ -17208,7 +17266,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17237,7 +17295,7 @@
 
 
 /***/ },
-/* 83 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -17285,7 +17343,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 84 */
+/* 85 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -17309,7 +17367,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 85 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17364,7 +17422,7 @@
 
 
 /***/ },
-/* 86 */
+/* 87 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -17382,7 +17440,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 87 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -17439,7 +17497,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 88 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17451,7 +17509,7 @@
 
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -17501,50 +17559,6 @@
 	};
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 90 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	/**
-	 * Check if we're required to add a port number.
-	 *
-	 * @see https://url.spec.whatwg.org/#default-port
-	 * @param {Number|String} port Port number we need to check
-	 * @param {String} protocol Protocol we need to check against.
-	 * @returns {Boolean} Is it a default port for the given protocol
-	 * @api private
-	 */
-	module.exports = function required(port, protocol) {
-	  protocol = protocol.split(':')[0];
-	  port = +port;
-	
-	  if (!port) return false;
-	
-	  switch (protocol) {
-	    case 'http':
-	    case 'ws':
-	    return port !== 80;
-	
-	    case 'https':
-	    case 'wss':
-	    return port !== 443;
-	
-	    case 'ftp':
-	    return port !== 21;
-	
-	    case 'gopher':
-	    return port !== 70;
-	
-	    case 'file':
-	    return false;
-	  }
-	
-	  return port !== 0;
-	};
-
 
 /***/ },
 /* 91 */
@@ -18799,13 +18813,16 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__resourceQuery) {var url = __webpack_require__(92);
-	var SockJS = __webpack_require__(62);
-	var stripAnsi = __webpack_require__(88);
+	var SockJS = __webpack_require__(63);
+	var stripAnsi = __webpack_require__(89);
 	var scriptElements = document.getElementsByTagName("script");
+	var scriptHost = scriptElements[scriptElements.length-1].getAttribute("src").replace(/\/[^\/]+$/, "");
 	
+	// If this bundle is inlined, use the resource query to get the correct url.
+	// Else, get the url from the <script> this file was called with.
 	var urlParts = url.parse( true ?
 		__resourceQuery.substr(1) :
-		scriptElements[scriptElements.length-1].getAttribute("src").replace(/\/[^\/]+$/, "")
+		(scriptHost ? scriptHost : "/")
 	);
 	
 	var sock = null;
